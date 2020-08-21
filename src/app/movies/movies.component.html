@@ -1,0 +1,220 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="movies-main" *ngIf="!isLoading">
+  <div class="latest-movies row">
+    <div class="header-wrapper">
+      <mat-icon class="movie-header-icon" color="primary"
+        >new_releases</mat-icon
+      >
+      <h1>Latest Movies</h1>
+    </div>
+    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+      <mat-grid-tile *ngFor="let i of Latest_movies_sub"
+        ><div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              i.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div
+                class="r1"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              >
+                <mat-icon>star</mat-icon>
+                <h4>{{ i.vote_average }}/10</h4>
+              </div>
+              <div
+                class="r2"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              ></div>
+              <div
+                class="r3"
+                style="height: 33.33%; width: 100%; text-align: center;"
+              >
+                <button mat-stroked-button style="font-size: 18px;">
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ i.title }}</h3>
+          <h4>{{ i.release_date }}</h4>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+  </div>
+  <mat-divider style="margin: 0rem 2rem 0rem 2rem;"></mat-divider>
+  <div class="popular-movies row">
+    <div class="header-wrapper">
+      <mat-icon class="movie-header-icon" color="primary">star</mat-icon>
+      <h1>Popular Movies</h1>
+    </div>
+    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+      <mat-grid-tile *ngFor="let i of Popular_Movies_sub"
+        ><div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              i.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div
+                class="r1"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              >
+                <mat-icon>star</mat-icon>
+                <h4>{{ i.vote_average }}/10</h4>
+              </div>
+              <div
+                class="r2"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              ></div>
+              <div
+                class="r3"
+                style="height: 33.33%; width: 100%; text-align: center;"
+              >
+                <button mat-stroked-button style="font-size: 18px;">
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ i.title }}</h3>
+          <h4>{{ i.release_date }}</h4>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+  </div>
+  <mat-divider style="margin: 0rem 2rem 0rem 2rem;"></mat-divider>
+  <div class="top-rated row">
+    <div class="header-wrapper">
+      <mat-icon class="movie-header-icon" color="primary">local_play</mat-icon>
+      <h1>Top Rated Movies</h1>
+    </div>
+    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+      <mat-grid-tile *ngFor="let i of Top_Rated_Movies_sub"
+        ><div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              i.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div
+                class="r1"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              >
+                <mat-icon>star</mat-icon>
+                <h4>{{ i.vote_average }}/10</h4>
+              </div>
+              <div
+                class="r2"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              ></div>
+              <div
+                class="r3"
+                style="height: 33.33%; width: 100%; text-align: center;"
+              >
+                <button mat-stroked-button style="font-size: 18px;">
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ i.title }}</h3>
+          <h4>{{ i.release_date }}</h4>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+  </div>
+  <mat-divider style="margin: 0rem 2rem 0rem 2rem;"></mat-divider>
+  <div class="upcoming-movies row">
+    <div class="header-wrapper">
+      <mat-icon class="movie-header-icon" color="primary"
+        >event_available</mat-icon
+      >
+      <h1>Upcoming Movies</h1>
+    </div>
+    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+      <mat-grid-tile *ngFor="let i of Upcoming_Movies_sub"
+        ><div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              i.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div
+                class="r1"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              >
+                <mat-icon>star</mat-icon>
+                <h4>{{ i.vote_average }}/10</h4>
+              </div>
+              <div
+                class="r2"
+                style="
+                  height: 33.33%;
+                  width: 100%;
+                  text-align: center;
+                  padding-top: 1rem;
+                "
+              ></div>
+              <div
+                class="r3"
+                style="height: 33.33%; width: 100%; text-align: center;"
+              >
+                <button mat-stroked-button style="font-size: 18px;">
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ i.title }}</h3>
+          <h4>{{ i.release_date }}</h4>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+    <mat-divider></mat-divider>
+  </div>
+</div>

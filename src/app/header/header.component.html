@@ -1,0 +1,24 @@
+<mat-toolbar
+  ><img id="logo" src="https://imgsto.s3.ap-south-1.amazonaws.com/logo.webp" />
+  <button mat-button id="Movies_Page" routerLink="/">
+    <mat-icon>local_movies</mat-icon>Movies
+  </button>
+
+  <button mat-button id="Games_Page" routerLink="/games">
+    <mat-icon>gamepad</mat-icon>&nbsp;Games
+  </button>
+  <span></span>
+  <button mat-stroked-button class="mobile-search">
+    <mat-icon>search</mat-icon>
+  </button>
+  <form #search="ngForm" (submit)="searchfunc(search)">
+    <mat-form-field appearance="outline">
+      <mat-label>Quick Search</mat-label>
+      <input matInput placeholder="Avengers" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+  <button mat-stroked-button class="search-button">
+    Search
+  </button>
+</mat-toolbar>

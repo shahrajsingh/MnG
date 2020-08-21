@@ -1,0 +1,13 @@
+app-header {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+.content {
+  padding-top: 64px;
+}
+@media screen and (max-width: 600px) {
+  .content {
+    padding-top: 56px;
+  }
+}
