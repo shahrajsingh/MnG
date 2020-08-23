@@ -1,6 +1,66 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-
-<div class="movies-main" *ngIf="!isLoading">
+<div class="search-results" *ngIf="mode == 'result'">
+  <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
+    <mat-grid-tile *ngFor="let i of search_results">
+      <div class="wrapper" *ngIf="i.poster_path != null">
+        <mat-card
+          class="movie-card"
+          style="background-image: url(https://image.tmdb.org/t/p/w185{{
+            i.poster_path
+          }});"
+        >
+          <div class="overlay" style="height: 100%;">
+            <div class="r1">
+              <mat-icon>star</mat-icon>
+              <h4>{{ i.vote_average }}/10</h4>
+            </div>
+            <div class="r2"></div>
+            <div class="r3">
+              <button
+                mat-stroked-button
+                style="font-size: 18px;"
+                [routerLink]="['/details', i.id]"
+              >
+                View Details
+              </button>
+            </div>
+          </div></mat-card
+        >
+        <h3>{{ i.title }}</h3>
+        <h4>{{ i.release_date }}</h4>
+      </div>
+      <div class="wrapper" *ngIf="i.poster_path == null">
+        <mat-card
+          class="movie-card"
+          style="
+            background-image: url(https://imgsto.s3.ap-south-1.amazonaws.com/NoPoster.PNG);
+          "
+        >
+          <div class="overlay" style="height: 100%;">
+            <div class="r1">
+              <mat-icon>star</mat-icon>
+              <h4>{{ i.vote_average }}/10</h4>
+            </div>
+            <div class="r2"></div>
+            <div class="r3">
+              <button
+                mat-stroked-button
+                style="font-size: 18px;"
+                [routerLink]="['/details', i.id]"
+              >
+                View Details
+              </button>
+            </div>
+          </div></mat-card
+        >
+        <h3>{{ i.title }}</h3>
+        <h4>{{ i.release_date }}</h4>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div class="movies-main" *ngIf="!isLoading && mode == 'list'">
+  <!--Latest Movies div-->
   <div class="latest-movies row">
     <div class="header-wrapper">
       <mat-icon class="movie-header-icon" color="primary"
@@ -8,7 +68,7 @@
       >
       <h1>Latest Movies</h1>
     </div>
-    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+    <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
       <mat-grid-tile *ngFor="let i of Latest_movies_sub"
         ><div class="wrapper">
           <mat-card
@@ -18,32 +78,17 @@
             }});"
           >
             <div class="overlay" style="height: 100%;">
-              <div
-                class="r1"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              >
+              <div class="r1">
                 <mat-icon>star</mat-icon>
                 <h4>{{ i.vote_average }}/10</h4>
               </div>
-              <div
-                class="r2"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              ></div>
-              <div
-                class="r3"
-                style="height: 33.33%; width: 100%; text-align: center;"
-              >
-                <button mat-stroked-button style="font-size: 18px;">
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', i.id]"
+                >
                   View Details
                 </button>
               </div>
@@ -54,14 +99,63 @@
         </div></mat-grid-tile
       >
     </mat-grid-list>
+    <div class="show-more" *ngIf="!showlatest">
+      <button mat-raised-button color="accent" (click)="show(1)">
+        Show More
+      </button>
+    </div>
+
+    <mat-grid-list
+      cols="{{ colSize }}"
+      rowHeight="405px"
+      gutterSize=" 1rem"
+      *ngIf="showlatest"
+    >
+      <mat-grid-tile *ngFor="let j of Latest_Movies">
+        <div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              j.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div class="r1">
+                <mat-icon>star</mat-icon>
+                <h4>{{ j.vote_average }}/10</h4>
+              </div>
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', j.id]"
+                >
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ j.title }}</h3>
+          <h4>{{ j.release_date }}</h4>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="show-less" *ngIf="showlatest">
+      <button mat-raised-button color="accent" (click)="show(1)">
+        Show Less
+      </button>
+    </div>
   </div>
   <mat-divider style="margin: 0rem 2rem 0rem 2rem;"></mat-divider>
+  <!--latest movies div end-->
+  <!--popular movies-->
   <div class="popular-movies row">
     <div class="header-wrapper">
       <mat-icon class="movie-header-icon" color="primary">star</mat-icon>
       <h1>Popular Movies</h1>
     </div>
-    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+    <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
       <mat-grid-tile *ngFor="let i of Popular_Movies_sub"
         ><div class="wrapper">
           <mat-card
@@ -71,32 +165,17 @@
             }});"
           >
             <div class="overlay" style="height: 100%;">
-              <div
-                class="r1"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              >
+              <div class="r1">
                 <mat-icon>star</mat-icon>
                 <h4>{{ i.vote_average }}/10</h4>
               </div>
-              <div
-                class="r2"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              ></div>
-              <div
-                class="r3"
-                style="height: 33.33%; width: 100%; text-align: center;"
-              >
-                <button mat-stroked-button style="font-size: 18px;">
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', i.id]"
+                >
                   View Details
                 </button>
               </div>
@@ -107,14 +186,63 @@
         </div></mat-grid-tile
       >
     </mat-grid-list>
+    <div class="show-more" *ngIf="!showpopular">
+      <button mat-raised-button color="accent" (click)="show(2)">
+        Show More
+      </button>
+    </div>
+
+    <mat-grid-list
+      cols="{{ colSize }}"
+      rowHeight="405px"
+      gutterSize=" 1rem"
+      *ngIf="showpopular"
+    >
+      <mat-grid-tile *ngFor="let j of Popular_Movies">
+        <div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              j.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div class="r1">
+                <mat-icon>star</mat-icon>
+                <h4>{{ j.vote_average }}/10</h4>
+              </div>
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', j.id]"
+                >
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ j.title }}</h3>
+          <h4>{{ j.release_date }}</h4>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="show-less" *ngIf="showpopular">
+      <button mat-raised-button color="accent" (click)="show(2)">
+        Show Less
+      </button>
+    </div>
   </div>
   <mat-divider style="margin: 0rem 2rem 0rem 2rem;"></mat-divider>
+  <!--popular movies end-->
+  <!--top rated movies-->
   <div class="top-rated row">
     <div class="header-wrapper">
       <mat-icon class="movie-header-icon" color="primary">local_play</mat-icon>
       <h1>Top Rated Movies</h1>
     </div>
-    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+    <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
       <mat-grid-tile *ngFor="let i of Top_Rated_Movies_sub"
         ><div class="wrapper">
           <mat-card
@@ -124,32 +252,17 @@
             }});"
           >
             <div class="overlay" style="height: 100%;">
-              <div
-                class="r1"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              >
+              <div class="r1">
                 <mat-icon>star</mat-icon>
                 <h4>{{ i.vote_average }}/10</h4>
               </div>
-              <div
-                class="r2"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              ></div>
-              <div
-                class="r3"
-                style="height: 33.33%; width: 100%; text-align: center;"
-              >
-                <button mat-stroked-button style="font-size: 18px;">
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', i.id]"
+                >
                   View Details
                 </button>
               </div>
@@ -160,8 +273,57 @@
         </div></mat-grid-tile
       >
     </mat-grid-list>
+    <div class="show-more" *ngIf="!showtoprated">
+      <button mat-raised-button color="accent" (click)="show(3)">
+        Show More
+      </button>
+    </div>
+
+    <mat-grid-list
+      cols="{{ colSize }}"
+      rowHeight="405px"
+      gutterSize=" 1rem"
+      *ngIf="showtoprated"
+    >
+      <mat-grid-tile *ngFor="let j of Top_Rated_Movies">
+        <div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              j.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div class="r1">
+                <mat-icon>star</mat-icon>
+                <h4>{{ j.vote_average }}/10</h4>
+              </div>
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', j.id]"
+                >
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ j.title }}</h3>
+          <h4>{{ j.release_date }}</h4>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="show-less" *ngIf="showtoprated">
+      <button mat-raised-button color="accent" (click)="show(3)">
+        Show Less
+      </button>
+    </div>
   </div>
   <mat-divider style="margin: 0rem 2rem 0rem 2rem;"></mat-divider>
+  <!--top rated movies end-->
+  <!-- upcoming movies-->
   <div class="upcoming-movies row">
     <div class="header-wrapper">
       <mat-icon class="movie-header-icon" color="primary"
@@ -169,7 +331,7 @@
       >
       <h1>Upcoming Movies</h1>
     </div>
-    <mat-grid-list cols="4" rowHeight="400px" gutterSize=" 1rem">
+    <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
       <mat-grid-tile *ngFor="let i of Upcoming_Movies_sub"
         ><div class="wrapper">
           <mat-card
@@ -179,32 +341,17 @@
             }});"
           >
             <div class="overlay" style="height: 100%;">
-              <div
-                class="r1"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              >
+              <div class="r1">
                 <mat-icon>star</mat-icon>
                 <h4>{{ i.vote_average }}/10</h4>
               </div>
-              <div
-                class="r2"
-                style="
-                  height: 33.33%;
-                  width: 100%;
-                  text-align: center;
-                  padding-top: 1rem;
-                "
-              ></div>
-              <div
-                class="r3"
-                style="height: 33.33%; width: 100%; text-align: center;"
-              >
-                <button mat-stroked-button style="font-size: 18px;">
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', i.id]"
+                >
                   View Details
                 </button>
               </div>
@@ -215,6 +362,55 @@
         </div></mat-grid-tile
       >
     </mat-grid-list>
-    <mat-divider></mat-divider>
+    <div class="show-more" *ngIf="!showupcoming">
+      <button mat-raised-button color="accent" (click)="show(4)">
+        Show More
+      </button>
+    </div>
+
+    <mat-grid-list
+      cols="{{ colSize }}"
+      rowHeight="405px"
+      gutterSize=" 1rem"
+      *ngIf="showupcoming"
+    >
+      <mat-grid-tile *ngFor="let j of Upcoming_Movies">
+        <div class="wrapper">
+          <mat-card
+            class="movie-card"
+            style="background-image: url(https://image.tmdb.org/t/p/w185{{
+              j.poster_path
+            }});"
+          >
+            <div class="overlay" style="height: 100%;">
+              <div class="r1">
+                <mat-icon>star</mat-icon>
+                <h4>{{ j.vote_average }}/10</h4>
+              </div>
+              <div class="r2"></div>
+              <div class="r3">
+                <button
+                  mat-stroked-button
+                  style="font-size: 18px;"
+                  [routerLink]="['/details', j.id]"
+                >
+                  View Details
+                </button>
+              </div>
+            </div></mat-card
+          >
+          <h3>{{ j.title }}</h3>
+          <h4>{{ j.release_date }}</h4>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="show-less" *ngIf="showupcoming">
+      <button mat-raised-button color="accent" (click)="show(4)">
+        Show Less
+      </button>
+    </div>
+    <mat-divider style="margin-top: 2rem;"></mat-divider>
   </div>
+  <!--upcoming movies end-->
 </div>
+<div class="details-page" *ngIf="mode == 'details'"></div>

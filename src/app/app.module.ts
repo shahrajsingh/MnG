@@ -38,6 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { MoviesComponent } from './movies/movies.component';
 import { GamesComponent } from './games/games.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import { GameDetailComponent } from './game-detail/game-detail.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { GamesComponent } from './games/games.component';
     HeaderComponent,
     MoviesComponent,
     GamesComponent,
+    MovieDetailComponent,
+    GameDetailComponent,
   ],
   imports: [
     BrowserModule,

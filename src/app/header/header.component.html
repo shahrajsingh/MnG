@@ -11,14 +11,21 @@
   <button mat-stroked-button class="mobile-search">
     <mat-icon>search</mat-icon>
   </button>
-  <form #search="ngForm" (submit)="searchfunc(search)">
+  <form #search="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Quick Search</mat-label>
-      <input matInput placeholder="Avengers" />
+      <input
+        matInput
+        name="searchmovie"
+        ngModel
+        required
+        minlength="1"
+        placeholder="Avengers"
+      />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </form>
-  <button mat-stroked-button class="search-button">
+  <button mat-stroked-button class="search-button" (click)="searchfunc(search)">
     Search
   </button>
 </mat-toolbar>

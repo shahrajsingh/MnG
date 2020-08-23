@@ -1,13 +1,40 @@
+.main {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+.app-header {
+  position: fixed;
+  height: 64px;
+  z-index: 1;
+  width: 100%;
+}
 app-header {
   width: 100%;
-  position: fixed;
-  z-index: 1;
+  opacity: 0.9;
 }
 .content {
-  padding-top: 64px;
+  margin-top: 64px;
+  z-index: 0;
+  flex-grow: 1;
+
+  display: flex;
+  flex-flow: column;
+}
+mat-sidenav-container {
+  flex-grow: 1;
+}
+mat-sidenav-content {
+  flex-grow: 1;
 }
 @media screen and (max-width: 600px) {
   .content {
-    padding-top: 56px;
+    margin-top: 56px;
+  }
+  .app-header {
+    position: fixed;
+    height: 56px;
+    z-index: 1;
+    width: 100%;
   }
 }

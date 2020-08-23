@@ -1,0 +1,43 @@
+<div class="detail-main" style="background-image: url({{ poster }});">
+  <div class="video" id="video">
+    <iframe class="video-frame" [src]="videosrc"> </iframe>
+  </div>
+  <div class="detail-table">
+    <h1>{{ movie.title }}</h1>
+    <table class="data-table">
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Genre</td>
+        <td class="data-table-row-data">
+          {{ movie.genres[0].name }}
+        </td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Release Date</td>
+        <td class="data-table-row-data">{{ movie.release_date }}</td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Original Language</td>
+        <td class="data-table-row-data">
+          {{ movie.spoken_languages[0].name }}
+        </td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Rating</td>
+        <td class="data-table-row-data">
+          {{ movie.vote_average }}<mat-icon style="color: gold;">star</mat-icon>
+        </td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Status</td>
+        <td class="data-table-row-data">{{ movie.status }}</td>
+      </tr>
+    </table>
+    <br />
+    <button mat-raised-button color="primary">View on Imdb</button>
+    &nbsp;
+    <button mat-raised-button color="accent">Back</button>
+  </div>
+</div>
+<mat-toolbar class="footer-bar">
+  Api by The Movie Database(TMDB)
+</mat-toolbar>
