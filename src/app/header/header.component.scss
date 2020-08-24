@@ -35,7 +35,7 @@ span {
   .mat-form-field-outline-thick {
   color: #259c5a !important;
 }
-form {
+.desktopform {
   margin-top: 1rem;
   font-size: 16px;
   margin-right: 8px;
@@ -44,15 +44,29 @@ form {
   height: 40px;
   margin-bottom: 5px;
 }
+#mobile-toolbar {
+  margin-top: -1px;
+  display: none;
+  transition: all 0.2s;
+}
 @media screen and (max-width: 600px) {
   .mobile-search {
     display: block;
     height: 80%;
   }
-  form {
+  .desktopform {
     display: none;
+  }
+  .mobileform {
+    margin-top: 1rem;
+    font-size: 16px;
+    margin-right: 8px;
   }
   .search-button {
     display: none;
+  }
+  .search-button-mob {
+    height: 40px;
+    margin-bottom: 5px;
   }
 }

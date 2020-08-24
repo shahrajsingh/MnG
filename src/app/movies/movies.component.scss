@@ -67,6 +67,26 @@ mat-spinner {
   width: 100%;
   text-align: center;
 }
+#myBtn {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  padding: 8px;
+  margin: 0px 4px 4px 0px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
 @media screen and (min-width: 601px) and (max-width: 768px) {
   .movie-card {
     width: 150px;

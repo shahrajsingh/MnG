@@ -8,10 +8,10 @@
     <mat-icon>gamepad</mat-icon>&nbsp;Games
   </button>
   <span></span>
-  <button mat-stroked-button class="mobile-search">
+  <button mat-stroked-button class="mobile-search" (click)="showbar()">
     <mat-icon>search</mat-icon>
   </button>
-  <form #search="ngForm">
+  <form class="desktopform" #search="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Quick Search</mat-label>
       <input
@@ -26,6 +26,29 @@
     </mat-form-field>
   </form>
   <button mat-stroked-button class="search-button" (click)="searchfunc(search)">
+    Search
+  </button>
+</mat-toolbar>
+<mat-toolbar id="mobile-toolbar">
+  <form class="mobileform" #search="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Quick Search</mat-label>
+      <input
+        matInput
+        name="searchmovie"
+        ngModel
+        required
+        minlength="1"
+        placeholder="Avengers"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+  <button
+    mat-stroked-button
+    class="search-button-mob"
+    (click)="searchfunc(search)"
+  >
     Search
   </button>
 </mat-toolbar>

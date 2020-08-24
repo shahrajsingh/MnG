@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -11,6 +11,7 @@ import { SearchService } from '../search.service';
   styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit {
+  mybutton = document.getElementById('myBtn');
   resultssub: Subscription;
   mobileQuery: MediaQueryList;
   tabQuery: MediaQueryList;
@@ -33,17 +34,21 @@ export class MoviesComponent implements OnInit {
   showupcoming: boolean = false;
   showpopular: boolean = false;
   search: string;
+
   constructor(
     private searchService: SearchService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    media: MediaMatcher
+    media: MediaMatcher,
+    changeDetectorRef: ChangeDetectorRef
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.tabQuery = media.matchMedia('(max-width: 1280px)');
     this.desktopQuery = media.matchMedia('(min-width: 1280px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
-
+  private _mobileQueryListener: () => void;
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('query')) {
@@ -63,6 +68,11 @@ export class MoviesComponent implements OnInit {
       this.mainfunc();
     }
     this.checksize();
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
   mainfunc() {
     this.http

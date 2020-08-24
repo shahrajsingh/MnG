@@ -10,6 +10,7 @@ import { from } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  show: boolean = false;
   constructor(private router: Router, private searchService: SearchService) {}
 
   ngOnInit(): void {}
@@ -26,6 +27,14 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/results', s]);
     } else {
       alert('enter vaild search queries');
+    }
+  }
+  showbar() {
+    this.show = !this.show;
+    if (this.show) {
+      document.getElementById('mobile-toolbar').style.display = 'flex';
+    } else {
+      document.getElementById('mobile-toolbar').style.display = 'none';
     }
   }
 }

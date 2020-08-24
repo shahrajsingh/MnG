@@ -1,6 +1,10 @@
 <div class="detail-main" style="background-image: url({{ poster }});">
   <div class="video" id="video">
-    <iframe class="video-frame" [src]="videosrc"> </iframe>
+    <iframe class="video-frame" [src]="videosrc" allowfullscreen="allowfullscreen"
+    mozallowfullscreen="mozallowfullscreen" 
+    msallowfullscreen="msallowfullscreen" 
+    oallowfullscreen="oallowfullscreen" 
+    webkitallowfullscreen="webkitallowfullscreen"> </iframe>
   </div>
   <div class="detail-table">
     <h1>{{ movie.title }}</h1>
