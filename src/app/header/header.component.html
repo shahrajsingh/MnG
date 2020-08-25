@@ -30,7 +30,7 @@
   </button>
 </mat-toolbar>
 <mat-toolbar id="mobile-toolbar">
-  <form class="mobileform" #search="ngForm">
+  <form class="mobileform" #searchmob="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Quick Search</mat-label>
       <input
@@ -47,7 +47,7 @@
   <button
     mat-stroked-button
     class="search-button-mob"
-    (click)="searchfunc(search)"
+    (click)="searchfunc(searchmob)"
   >
     Search
   </button>

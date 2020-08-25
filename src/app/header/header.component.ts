@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
   searchfunc(form: NgForm) {
     if (form.invalid) {
+      console.log('called');
       this.router.navigate(['/']);
       return;
     }
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
     }
   }
   showbar() {
+    console.log('called00');
     this.show = !this.show;
     if (this.show) {
       document.getElementById('mobile-toolbar').style.display = 'flex';

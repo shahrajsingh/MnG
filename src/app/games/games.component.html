@@ -1,1 +1,29 @@
-<p>games works!</p>
+<div class="games-main">
+  <div class="games-list">
+    <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
+      <mat-grid-tile *ngFor="let i of games; let ind = index">
+        <div class="game-card-wraper">
+          <mat-card
+            class="game-card"
+            style="background-image: url({{ i.background_image }});"
+          >
+            <video
+              autoplay
+              [muted]="'muted'"
+              loop
+              id="Video-clip"
+              preload="none"
+            >
+              <source src="{{ clip[ind] }}" />
+            </video>
+          </mat-card>
+
+          <h3>{{ i.name }}</h3>
+
+          <h4>{{ i.released }}</h4>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <mat-toolbar class="games-footer"><h3>Api provided by RAWG</h3></mat-toolbar>
+</div>

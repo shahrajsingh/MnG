@@ -40,13 +40,12 @@ export class MoviesComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     media: MediaMatcher,
-    changeDetectorRef: ChangeDetectorRef
+    
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.tabQuery = media.matchMedia('(max-width: 1280px)');
     this.desktopQuery = media.matchMedia('(min-width: 1280px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    
   }
   private _mobileQueryListener: () => void;
   ngOnInit(): void {
