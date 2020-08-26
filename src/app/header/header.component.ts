@@ -2,7 +2,6 @@ import { SearchService } from '../search.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +10,7 @@ import { from } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   show: boolean = false;
+  theme: boolean = true;
   constructor(
     private router: Router,
     private searchService: SearchService,
