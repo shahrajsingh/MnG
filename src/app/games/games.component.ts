@@ -3,12 +3,15 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { SearchService } from '../search.service';
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.scss'],
 })
 export class GamesComponent implements OnInit {
+  accessed: boolean = false;
+  isLoading: boolean = true;
   mode: String = 'list';
   api_key = '00120c71fafa0b093f088af0f0e1ef61';
   colSize: number;
@@ -20,7 +23,11 @@ export class GamesComponent implements OnInit {
   tabQuery: MediaQueryList;
   desktopQuery: MediaQueryList;
   Query: MediaQueryList;
-  constructor(private http: HttpClient, private media: MediaMatcher) {
+  constructor(
+    private http: HttpClient,
+    private media: MediaMatcher,
+    private SearchService: SearchService
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 689px)');
     this.Query = media.matchMedia('max-width: 1050px');
     this.tabQuery = media.matchMedia('(max-width: 1399px)');
@@ -39,8 +46,15 @@ export class GamesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.getElementById('Video-clip');
-
+    if (!this.SearchService.getloadcount()) {
+      setTimeout(() => {
+        this.changestate();
+        this.SearchService.setloadcount();
+      }, 3000);
+    } else {
+      this.changestate();
+    }
+    this.accessed = true;
     this.resizeObservable = fromEvent(window, 'resize');
     this.resizeSubscription = this.resizeObservable.subscribe((evt) => {
       if (window.innerWidth < 689) {
@@ -61,16 +75,19 @@ export class GamesComponent implements OnInit {
         .subscribe((result) => {
           this.games = result.results;
           const len = this.games.length;
-          console.log(this.games);
+
           for (let i = 0; i < len; i++) {
             if (this.games[i].clip == null) {
               this.clip.push('Error');
             } else {
               this.clip.push(this.games[i].clip.clips['320']);
             }
-            console.log(this.clip[i]);
           }
         });
     }
+  }
+  changestate() {
+    this.isLoading = false;
+    document.getElementById('games-main').style.visibility = 'visible';
   }
 }

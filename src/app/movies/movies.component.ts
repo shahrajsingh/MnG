@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 
 @Component({
@@ -34,21 +34,31 @@ export class MoviesComponent implements OnInit {
   showupcoming: boolean = false;
   showpopular: boolean = false;
   search: string;
-
+  resizeObservable: Observable<Event>;
+  resizeSubscription: Subscription;
   constructor(
     private searchService: SearchService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    media: MediaMatcher,
-    
+    media: MediaMatcher
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.tabQuery = media.matchMedia('(max-width: 1280px)');
     this.desktopQuery = media.matchMedia('(min-width: 1280px)');
-    
   }
-  private _mobileQueryListener: () => void;
   ngOnInit(): void {
+    this.resizeObservable = fromEvent(window, 'resize');
+    this.resizeSubscription = this.resizeObservable.subscribe((evt) => {
+      if (window.innerWidth < 600) {
+        this.colSize = 1;
+      } else if (window.innerWidth > 600 && window.innerWidth <= 814) {
+        this.colSize = 2;
+      } else if (window.innerWidth > 814 && window.innerWidth <= 1279) {
+        this.colSize = 3;
+      } else {
+        this.colSize = 4;
+      }
+    });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('query')) {
         this.mode = 'result';
@@ -144,17 +154,7 @@ export class MoviesComponent implements OnInit {
       this.colSize = 4;
     }
   }
-  onResize(evt: Event): void {
-    const w = <Window>evt.target;
-    if (w.innerWidth <= 600) {
-      this.colSize = 1;
-    } else if (w.innerWidth > 600 && w.innerWidth <= 1280) {
-      this.colSize = 3;
-    } else {
-      this.colSize = 4;
-    }
-    this.mainfunc();
-  }
+
   pushtoarr(arr: any, sec: any, n: number) {
     if (n == 1) {
       n = 2;

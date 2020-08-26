@@ -9,7 +9,7 @@ export class SearchService {
   search_results_changed = new Subject<{ search_results: [] }>();
   search_results: [];
   api_key: string = '00120c71fafa0b093f088af0f0e1ef61';
-
+  isLoaded: boolean=false;
   constructor(private http: HttpClient) {}
   search(query: string) {
     this.http
@@ -29,5 +29,11 @@ export class SearchService {
   }
   search_service(): Observable<{ search_results: [] }> {
     return this.search_results_changed.asObservable();
+  }
+  setloadcount(){
+    this.isLoaded = true;
+  }
+  getloadcount(){
+    return this.isLoaded;
   }
 }

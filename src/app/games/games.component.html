@@ -1,8 +1,12 @@
-<div class="games-main">
+<div class="spin" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="games-main" id="games-main">
   <div class="games-list">
     <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
       <mat-grid-tile *ngFor="let i of games; let ind = index">
-        <div class="game-card-wraper">
+        <div class="game-card-wraper" [routerLink]="['/gameDetail', i.id]">
           <mat-card
             class="game-card"
             style="background-image: url({{ i.background_image }});"
