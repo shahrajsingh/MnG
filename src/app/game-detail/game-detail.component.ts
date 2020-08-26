@@ -46,7 +46,4 @@ export class GameDetailComponent implements OnInit {
       }
     });
   }
-  goBack() {
-    window.history.back();
-  }
 }

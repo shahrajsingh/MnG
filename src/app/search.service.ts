@@ -31,10 +31,12 @@ export class SearchService {
       });
   }
   searchgame(s: string) {
+    console.log('in search game');
     this.http
       .get<{ results }>('https://api.rawg.io/api/games?search=+' + s)
       .subscribe((result) => {
         this.game_results = result.results;
+        console.log(this.game_results);
         this.game_results_changed.next([...this.game_results]);
       });
   }

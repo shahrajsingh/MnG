@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
         this.searchService.search(s);
         this.router.navigate(['/results', s]);
       } else if (this.searchService.getpage() === 'game') {
+        console.log('search game');
         this.searchService.searchgame(s);
         this.router.navigate(['/gameresults', s]);
       }

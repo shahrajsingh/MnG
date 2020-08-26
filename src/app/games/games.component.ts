@@ -1,4 +1,3 @@
-import { query } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +11,7 @@ import { SearchService } from '../search.service';
 })
 export class GamesComponent implements OnInit {
   accessed: boolean = false;
-  isLoading: boolean = true;
+
   mode: string = 'list';
   api_key = '00120c71fafa0b093f088af0f0e1ef61';
   colSize: number;
@@ -56,20 +55,10 @@ export class GamesComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('game')) {
         this.mode = 'search';
-        this.mode;
       } else {
         this.mode = 'list';
-        this.mode;
       }
     });
-    if (!this.SearchService.getloadcount()) {
-      setTimeout(() => {
-        this.changestate();
-        this.SearchService.setloadcount();
-      }, 3000);
-    } else {
-      this.changestate();
-    }
     this.accessed = true;
     this.resizeObservable = fromEvent(window, 'resize');
     this.resizeSubscription = this.resizeObservable.subscribe((evt) => {
@@ -101,9 +90,5 @@ export class GamesComponent implements OnInit {
           }
         });
     }
-  }
-  changestate() {
-    this.isLoading = false;
-    document.getElementById('games-main').style.visibility = 'visible';
   }
 }
