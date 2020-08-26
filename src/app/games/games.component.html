@@ -3,9 +3,35 @@
 </div>
 
 <div class="games-main" id="games-main">
-  <div class="games-list">
+  <div class="games-list" *ngIf="mode === 'list'">
     <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
       <mat-grid-tile *ngFor="let i of games; let ind = index">
+        <div class="game-card-wraper" [routerLink]="['/gameDetail', i.id]">
+          <mat-card
+            class="game-card"
+            style="background-image: url({{ i.background_image }});"
+          >
+            <video
+              autoplay
+              [muted]="'muted'"
+              loop
+              id="Video-clip"
+              preload="none"
+            >
+              <source src="{{ clip[ind] }}" />
+            </video>
+          </mat-card>
+
+          <h3>{{ i.name }}</h3>
+
+          <h4>{{ i.released }}</h4>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div class="games-list" *ngIf="mode === 'search'">
+    <mat-grid-list cols="{{ colSize }}" rowHeight="405px" gutterSize=" 1rem">
+      <mat-grid-tile *ngFor="let i of searchres; let ind = index">
         <div class="game-card-wraper" [routerLink]="['/gameDetail', i.id]">
           <mat-card
             class="game-card"

@@ -47,6 +47,8 @@ export class MoviesComponent implements OnInit {
     this.desktopQuery = media.matchMedia('(min-width: 1280px)');
   }
   ngOnInit(): void {
+    this.searchService.setpage('movie');
+
     this.resizeObservable = fromEvent(window, 'resize');
     this.resizeSubscription = this.resizeObservable.subscribe((evt) => {
       if (window.innerWidth < 600) {
@@ -92,7 +94,7 @@ export class MoviesComponent implements OnInit {
       )
       .subscribe((result) => {
         this.Latest_Movies = result.results;
-
+       
         this.pushtoarr(
           this.Latest_Movies,
           this.Latest_movies_sub,

@@ -2,6 +2,7 @@ import { query } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { SearchService } from '../search.service';
 @Component({
@@ -12,12 +13,13 @@ import { SearchService } from '../search.service';
 export class GamesComponent implements OnInit {
   accessed: boolean = false;
   isLoading: boolean = true;
-  mode: String = 'list';
+  mode: string = 'list';
   api_key = '00120c71fafa0b093f088af0f0e1ef61';
   colSize: number;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
   games;
+  searchres;
   clip = new Array();
   mobileQuery: MediaQueryList;
   tabQuery: MediaQueryList;
@@ -26,7 +28,8 @@ export class GamesComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private media: MediaMatcher,
-    private SearchService: SearchService
+    private SearchService: SearchService,
+    private route: ActivatedRoute
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 689px)');
     this.Query = media.matchMedia('max-width: 1050px');
@@ -46,6 +49,19 @@ export class GamesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.SearchService.setpage('game');
+    this.SearchService.gamesearch_service().subscribe((res) => {
+      this.searchres = res;
+    });
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      if (paramMap.has('game')) {
+        this.mode = 'search';
+        this.mode;
+      } else {
+        this.mode = 'list';
+        this.mode;
+      }
+    });
     if (!this.SearchService.getloadcount()) {
       setTimeout(() => {
         this.changestate();

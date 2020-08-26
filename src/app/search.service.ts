@@ -6,10 +6,13 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService {
+  page: string = 'movies';
   search_results_changed = new Subject<{ search_results: [] }>();
+  game_results_changed = new Subject();
   search_results: [];
+  game_results: [];
   api_key: string = '00120c71fafa0b093f088af0f0e1ef61';
-  isLoaded: boolean=false;
+  isLoaded: boolean = false;
   constructor(private http: HttpClient) {}
   search(query: string) {
     this.http
@@ -27,13 +30,30 @@ export class SearchService {
         });
       });
   }
+  searchgame(s: string) {
+    this.http
+      .get<{ results }>('https://api.rawg.io/api/games?search=+' + s)
+      .subscribe((result) => {
+        this.game_results = result.results;
+        this.game_results_changed.next([...this.game_results]);
+      });
+  }
   search_service(): Observable<{ search_results: [] }> {
     return this.search_results_changed.asObservable();
   }
-  setloadcount(){
+  gamesearch_service() {
+    return this.game_results_changed.asObservable();
+  }
+  setpage(x: string) {
+    this.page = x;
+  }
+  getpage() {
+    return this.page;
+  }
+  setloadcount() {
     this.isLoaded = true;
   }
-  getloadcount(){
+  getloadcount() {
     return this.isLoaded;
   }
 }

@@ -1,0 +1,97 @@
+.video {
+  width: 60%;
+  margin-right: 4px;
+}
+.video-frame {
+  width: 100%;
+
+  border: none;
+}
+.detail-table {
+  width: 40%;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  padding: 1rem;
+}
+.footer-bar {
+  height: 48px;
+  font-size: 18px;
+  justify-content: center;
+}
+.detail-table {
+  height: 400px;
+}
+.data-table {
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  font-size: 22px;
+}
+.data-table-row {
+  width: 100%;
+  height: 36px;
+}
+.data-table-row-data {
+  width: 50%;
+  padding: 1rem;
+}
+tr:nth-child(even) {
+  background-color: rgba($color: #000000, $alpha: 0.2);
+}
+tr:nth-child(odd) {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+}
+@media screen and (min-width: 1024px) {
+  .detail-main {
+    padding: 3rem 1rem 1rem 1rem;
+    display: flex;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .video-frame {
+    height: 500px;
+  }
+  .detail-table {
+    height: 468px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .detail-main {
+    display: block;
+    padding: 3rem 1rem 1rem 1rem;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .video {
+    width: 100%;
+  }
+  .video-frame {
+    width: 100%;
+    height: 500px;
+  }
+  .detail-table {
+    width: 95.6%;
+    height: 400px;
+  }
+}
+@media screen and (max-width: 765px) {
+  .detail-main {
+    padding: 3rem 1rem 1rem 1rem;
+    display: block;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .video {
+    width: 100%;
+  }
+  .video-frame {
+    width: 100%;
+    height: 450px;
+  }
+  .detail-table {
+    width: 90.6%;
+    height: 450px;
+  }
+}

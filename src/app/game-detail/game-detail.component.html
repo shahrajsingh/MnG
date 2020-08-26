@@ -1,1 +1,66 @@
-<p>game-detail works!</p>
+<div
+  class="spin"
+  style="display: flex; justify-content: center; height: 100%; width: 100%"
+  *ngIf="isLoading"
+>
+  <mat-spinner></mat-spinner>
+</div>
+<div
+  class="detail-main"
+  style="background-image: url({{ game.background_image }});"
+  *ngIf="!isLoading"
+>
+  <div class="video" id="video">
+    <iframe
+      class="video-frame"
+      [src]="videosrc"
+      allowfullscreen="allowfullscreen"
+      mozallowfullscreen="mozallowfullscreen"
+      msallowfullscreen="msallowfullscreen"
+      oallowfullscreen="oallowfullscreen"
+      webkitallowfullscreen="webkitallowfullscreen"
+      *ngIf="videosrc != null"
+    >
+    </iframe>
+  </div>
+  <div class="detail-table">
+    <h1>{{ game.name }}</h1>
+    <table class="data-table">
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Genre</td>
+        <td class="data-table-row-data">
+          {{ game.genres[0].name }}
+        </td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Release Date</td>
+        <td class="data-table-row-data">{{ game.released }}</td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Developer</td>
+        <td class="data-table-row-data">{{ game.developers[0].name }}</td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Rating</td>
+        <td class="data-table-row-data">
+          {{ game.rating
+          }}<mat-icon style="color: gold; position: absolute">star</mat-icon>
+          &nbsp;&nbsp;&nbsp;/ 5
+        </td>
+      </tr>
+      <tr class="data-table-row">
+        <td class="data-table-row-data">Status</td>
+        <td class="data-table-row-data">{{ released }}</td>
+      </tr>
+    </table>
+    <br />
+
+    <a href="{{ game.stores[0].url }}" target="_blank"
+      ><button mat-raised-button color="primary">Buy</button></a
+    >
+
+    &nbsp;
+    <button mat-raised-button color="accent" (click)="goBack()">Back</button>
+  </div>
+</div>
+<mat-toolbar class="footer-bar"> Api by The Movie Database(TMDB) </mat-toolbar>

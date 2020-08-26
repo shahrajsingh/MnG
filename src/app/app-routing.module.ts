@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'details/:ID', component: MovieDetailComponent },
   { path: 'results/:query', component: MoviesComponent },
   { path: 'gameDetail/:gID', component: GameDetailComponent },
+  { path: 'gameresults/:game', component: GamesComponent },
 ];
 
 @NgModule({

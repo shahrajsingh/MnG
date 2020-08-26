@@ -1,23 +1,29 @@
 <div class="detail-main" style="background-image: url({{ poster }});">
   <div class="video" id="video">
-    <iframe class="video-frame" [src]="videosrc" allowfullscreen="allowfullscreen"
-    mozallowfullscreen="mozallowfullscreen" 
-    msallowfullscreen="msallowfullscreen" 
-    oallowfullscreen="oallowfullscreen" 
-    webkitallowfullscreen="webkitallowfullscreen"> </iframe>
+    <iframe
+      class="video-frame"
+      [src]="videosrc"
+      allowfullscreen="allowfullscreen"
+      mozallowfullscreen="mozallowfullscreen"
+      msallowfullscreen="msallowfullscreen"
+      oallowfullscreen="oallowfullscreen"
+      webkitallowfullscreen="webkitallowfullscreen"
+      *ngIf="videosrc != null"
+    >
+    </iframe>
   </div>
   <div class="detail-table">
-    <h1>{{ movie.title }}</h1>
+    <h1>{{ title }}</h1>
     <table class="data-table">
       <tr class="data-table-row">
         <td class="data-table-row-data">Genre</td>
         <td class="data-table-row-data">
-          {{ movie.genres[0].name }}
+          {{ genre }}
         </td>
       </tr>
       <tr class="data-table-row">
         <td class="data-table-row-data">Release Date</td>
-        <td class="data-table-row-data">{{ movie.release_date }}</td>
+        <td class="data-table-row-data">{{ release_date }}</td>
       </tr>
       <tr class="data-table-row">
         <td class="data-table-row-data">Original Language</td>
@@ -28,7 +34,7 @@
       <tr class="data-table-row">
         <td class="data-table-row-data">Rating</td>
         <td class="data-table-row-data">
-          {{ movie.vote_average }}<mat-icon style="color: gold;">star</mat-icon>
+          {{ movie.vote_average }}<mat-icon style="color: gold">star</mat-icon>
         </td>
       </tr>
       <tr class="data-table-row">
@@ -37,11 +43,12 @@
       </tr>
     </table>
     <br />
-    <button mat-raised-button color="primary">View on Imdb</button>
+    <a href="https://imdb.com/title/{{ movie.imdb_id }}" target="_blank"
+      ><button mat-raised-button color="primary">View on IMDB</button></a
+    >
+
     &nbsp;
-    <button mat-raised-button color="accent">Back</button>
+    <button mat-raised-button color="accent" (click)="goBack()">Back</button>
   </div>
 </div>
-<mat-toolbar class="footer-bar">
-  Api by The Movie Database(TMDB)
-</mat-toolbar>
+<mat-toolbar class="footer-bar"> Api by The Movie Database(TMDB) </mat-toolbar>
